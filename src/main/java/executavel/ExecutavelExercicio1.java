@@ -1,4 +1,3 @@
- 
 package executavel;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import model.vo.Telefone;
 public class ExecutavelExercicio1 {
 
 	public static void main(String[] argumentosLinhaDeComando) {
-
+		
 		 executarExercicio2();
 
 //		executarExercicio3();
