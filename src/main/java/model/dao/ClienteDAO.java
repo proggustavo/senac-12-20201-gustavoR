@@ -43,7 +43,7 @@ public class ClienteDAO {
 		return novoCliente;
 	}
 
-	public boolean excluir(int id) {
+	public boolean excluirCliente(int id) {
 		// TODO liberar todos os telefones que o usuário possuía
 		
 		// TODO Apagar o cliente ou fazer exclusão lógica?

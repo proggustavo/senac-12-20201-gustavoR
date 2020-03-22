@@ -7,9 +7,14 @@ import model.vo.Cliente;
 
 public class ClienteController {
 
-	private ClienteDAO dao = new ClienteDAO();
+	private ClienteDAO clienteDao = new ClienteDAO();
 
 	public ArrayList<Cliente> listarTodosOsClientes() {
-		return dao.consultarTodos();
+		return clienteDao.consultarTodos();
+	}
+
+	public boolean excluirCliente(Cliente cliente) {
+		return clienteDao.excluirCliente(cliente.getId()); 
+		
 	}
 }
