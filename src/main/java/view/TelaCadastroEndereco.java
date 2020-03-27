@@ -1,10 +1,13 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,9 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import controller.EnderecoController;
 
 public class TelaCadastroEndereco extends JFrame {
 
@@ -23,8 +25,10 @@ public class TelaCadastroEndereco extends JFrame {
 	private JTextField textBairro;
 	private JTextField textCidade;
 	private JTextField textNumero;
-	private JFormattedTextField txtCep;
+	private JFormattedTextField textCep;
 	private JComboBox cbSiglaEstado;
+	private EnderecoController enderecoController; 
+
 	/**
 	 * Launch the application.
 	 */
@@ -53,31 +57,37 @@ public class TelaCadastroEndereco extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRua = new JLabel("Rua:");
+		JLabel lblRua = new JLabel("Rua:*");
 		lblRua.setBounds(15, 15, 60, 15);
 		contentPane.add(lblRua);
 		
-		JLabel lblNewLabel = new JLabel("Bairro:");
-		lblNewLabel.setBounds(15, 45, 60, 15);
-		contentPane.add(lblNewLabel);
+		JLabel lblBairro = new JLabel("Bairro:*");
+		lblBairro.setBounds(15, 45, 60, 15);
+		contentPane.add(lblBairro);
 		
-		JLabel lblCidade = new JLabel("Cidade:");
+		JLabel lblCidade = new JLabel("Cidade:*");
 		lblCidade.setBounds(15, 83, 70, 15);
 		contentPane.add(lblCidade);
 		
-		JLabel lblEstado = new JLabel("Estado:");
+		JLabel lblEstado = new JLabel("Estado:*");
 		lblEstado.setBounds(241, 83, 70, 15);
 		contentPane.add(lblEstado);
 		
-		JLabel lblNmero = new JLabel("Número:");
+		JLabel lblNmero = new JLabel("Número:*");
 		lblNmero.setBounds(241, 15, 70, 15);
 		contentPane.add(lblNmero);
 		
-		JLabel lblCep = new JLabel("CEP:");
+		JLabel lblCep = new JLabel("CEP:*");
 		lblCep.setBounds(241, 45, 70, 15);
 		contentPane.add(lblCep);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				enderecoController.salvar(textRua.getText(), textBairro.getText(), textNumero.getText(), textCep.getText() , textCidade.getText(),
+				(String)cbSiglaEstado.getSelectedItem());
+			}
+		});
 		btnSalvar.setBounds(98, 119, 117, 25);
 		contentPane.add(btnSalvar);
 		
@@ -103,7 +113,7 @@ public class TelaCadastroEndereco extends JFrame {
 		
 		textCidade = new JTextField();
 		textCidade.setBounds(78, 81, 137, 20);
-		contentPane.add(textCidade);
+		contentPane.add(textCidade); //TODO combobox com as cidades por estado
 		textCidade.setColumns(10);
 		
 		textNumero = new JTextField();
@@ -113,16 +123,16 @@ public class TelaCadastroEndereco extends JFrame {
 		
 		try {
 			MaskFormatter mascaraCep = new MaskFormatter("#####-###");
-			txtCep = new JFormattedTextField();
-			txtCep.setBounds(314, 43, 110, 20);
-			contentPane.add(txtCep);
+			textCep = new JFormattedTextField(mascaraCep);
+			textCep.setBounds(314, 43, 110, 20);
+			contentPane.add(textCep);
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
 		ArrayList<String> siglasEstados =  consultarEstados();
-		cbSiglaEstado = new JComboBox(siglasEstados.toArray());
+		cbSiglaEstado = new JComboBox(siglasEstados.toArray()); //TODO integrar api correios
 		cbSiglaEstado.setBounds(314, 78, 50, 25);
 		contentPane.add(cbSiglaEstado);
 	}
@@ -134,7 +144,7 @@ public class TelaCadastroEndereco extends JFrame {
 		this.textNumero.setText("");
 		this.textBairro.setText("");
 		this.textBairro.setText("");
-		this.txtCep.setText("");
+		this.textCep.setText("");
 		this.cbSiglaEstado.setSelectedIndex(-1);
 	}
 
