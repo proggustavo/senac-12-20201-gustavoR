@@ -1,9 +1,24 @@
 package controller;
 
+import model.bo.EnderecoBO;
+
 public class EnderecoController {
 	
 	private static final int TAMANHO_MINIMO_CAMPO_RUA = 3;
 	private static final int TAMANHO_MAXIMO_CAMPO_RUA = 255;
+	
+	private EnderecoBO enderecoBo = new EnderecoBO();
+	
+	public String excluir(String textoIdSelecionado) {
+		String mensagem = "";
+		try {
+			int idSelecionado = Integer.parseInt(textoIdSelecionado);
+			mensagem = enderecoBo.excluir(idSelecionado);
+		} catch (NumberFormatException ex) {
+			mensagem = "Informe um número inteiro";
+		}
+		return mensagem;
+	}
 
 	public String salvar(String rua, String bairro, String numero, String cep, String cidade, String estado) {
 		String mensagem = "";

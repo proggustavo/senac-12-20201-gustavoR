@@ -18,9 +18,9 @@ import model.vo.Cliente;
 public class TelaExclusãoClientes {
 
 	private JFrame frame;
-	private JTextField textCpf;
 	private JComboBox cmbClientes;
 	private ClienteController clienteController = new ClienteController();
+	private ArrayList<Cliente> clientes;
 
 	/**
 	 * Launch the application.
@@ -53,46 +53,41 @@ public class TelaExclusãoClientes {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel lblSelecioneONome = new JLabel("Selecione o nome ou insira o CPF");
-		lblSelecioneONome.setBounds(59, 12, 247, 23);
+		frame.setTitle("Tela para Exclusão de Clientes");
+
+		JLabel lblSelecioneONome = new JLabel("Selecione o cliente:");
+		lblSelecioneONome.setBounds(145, 12, 247, 23);
 		frame.getContentPane().add(lblSelecioneONome);
-		
-		
-		ArrayList<Cliente> clientes = clienteController.listarTodosOsClientes();
-		cmbClientes =  new JComboBox(clientes.toArray());
-		cmbClientes.setBounds(59, 47, 234, 24);
+
+		clientes = clienteController.listarTodosOsClientes();
+		cmbClientes = new JComboBox();
+		cmbClientes.addItem("- - - - - - - - Selecione um Cliente - - - - - - - -");
+		for (Cliente cliente : clientes) {
+			cmbClientes.addItem(cliente);
+		}
+		cmbClientes.setBounds(41, 47, 367, 24);
 		frame.getContentPane().add(cmbClientes);
-		
-		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(59, 82, 70, 15);
-		frame.getContentPane().add(lblCpf);
-		
-		textCpf = new JTextField();
-		textCpf.setBounds(59, 109, 234, 21);
-		frame.getContentPane().add(textCpf);
-		textCpf.setColumns(10);
-		
+		cmbClientes.setSelectedItem(0);
+
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO adicionar uma confirmação se deseja excluir o cliente
 				
-				Cliente cliente = (Cliente)cmbClientes.getSelectedItem();
-				String message = "";
-				if(clienteController.excluirCliente(cliente)) {
-					message = "Cliente excluído com sucesso!";
-					JOptionPane.showMessageDialog(null, message);
-				}else {
-					message = "Cliente não foi excluído!";
-					JOptionPane.showMessageDialog(null, message);
-				}
-						
-						
-				
+				Cliente cliente = new Cliente();
+				try {
+					cliente = (Cliente) cmbClientes.getSelectedItem();
+					JOptionPane.showMessageDialog(null, clienteController.excluirCliente(cliente), "Excluir Cliente", JOptionPane.INFORMATION_MESSAGE);
+					clientes = clienteController.listarTodosOsClientes();
+				} catch (ClassCastException e) {
+					JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado!", "Atenção!",
+							JOptionPane.WARNING_MESSAGE);
+				}				
 			}
 		});
-		btnExcluir.setBounds(113, 168, 117, 25);
+
+		btnExcluir.setBounds(156, 110, 117, 25);
 		frame.getContentPane().add(btnExcluir);
+
 	}
 }

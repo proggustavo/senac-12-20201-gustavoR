@@ -44,8 +44,20 @@ public class EnderecoDAO implements BaseDAO<Endereco>{
 	}
 
 	public boolean excluir(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = " DELETE FROM endereco WHERE id = ?";
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(conexao, sql);
+		boolean excluiu = false;
+		try {
+			preparedStatement.setInt(1, id);
+			int codigoRetornoUpdate = preparedStatement.executeUpdate();
+
+			excluiu = (codigoRetornoUpdate == Banco.CODIGO_RETORNO_SUCESSO_EXCLUSAO);
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao excluir endereço. Id: " + id + " .Causa: " + ex.getMessage());
+		}
+		return excluiu;
 	}
 
 	public boolean alterar(Endereco entidade) {
@@ -106,6 +118,23 @@ public class EnderecoDAO implements BaseDAO<Endereco>{
 			System.out.println(" Erro ao consultar endereços. Causa: " + ex.getMessage());
 		}
 		return enderecos;
+	}
+	
+	public boolean temEnderecoCadastradoComId(int idSelecionado) {
+		String sql = " SELECT id FROM endereco WHERE id = " + idSelecionado;
+
+		Connection conexao = Banco.getConnection();
+		PreparedStatement preparedStatement = Banco.getPreparedStatement(conexao, sql);
+
+		boolean enderecoJaCadastrado = false;
+		try {
+			ResultSet conjuntoResultante = preparedStatement.executeQuery();
+			enderecoJaCadastrado = conjuntoResultante.next();
+		} catch (SQLException ex) {
+			System.out.println(" Erro ao verificar se endereço consta no banco. Causa: " + ex.getMessage());
+		}
+
+		return enderecoJaCadastrado;
 	}
 
 }

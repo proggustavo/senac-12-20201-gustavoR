@@ -55,3 +55,10 @@ INSERT INTO ENDERECO (id,cep,estado,cidade,bairro,numero,rua) VALUES (4,'3915227
 INSERT INTO ENDERECO (id,cep,estado,cidade,bairro,numero,rua) VALUES (5,'78015242','SC','Florianópolis','Centro','126','Rua  6');
 INSERT INTO ENDERECO (id,cep,estado,cidade,bairro,numero,rua) VALUES (6,'41857751','SC','Chapecó','Centro','125','Rua 66');
 
+
+
+INSERT INTO TELEFONE (id, codigopais, ddd, numero, movel, ativo, idcliente) VALUES (default, '55', '48','997788888', 1, 1, 1);
+INSERT INTO TELEFONE (id, codigopais, ddd, numero, movel, ativo, idcliente) VALUES (default, '53', '47','997788884', 1, 1, 2);
+INSERT INTO TELEFONE (id, codigopais, ddd, numero, movel, ativo, idcliente) VALUES (default, '55', '41','997788885', 1, 1, 3);
+INSERT INTO TELEFONE (id, codigopais, ddd, numero, movel, ativo, idcliente) VALUES (default, '57', '42','997788889', 1, 1, 4);
+
