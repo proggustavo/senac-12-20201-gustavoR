@@ -211,6 +211,7 @@ public class Banco {
 			PreparedStatement stmt = conn.prepareStatement(sql, tipoRetorno);
 			return stmt;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Erro ao obter o PreparedStatement.");
 			return null;
 		}

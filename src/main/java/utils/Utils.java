@@ -7,8 +7,10 @@ public class Utils {
 
 	public static boolean validarCpfCnpj(String cpfCnpj) {
 		cpfCnpj.replaceAll("[^0-9]", "");
-		String result = executeRegexp(cpfCnpj, "(\\d{11}|\\d{14})", 1, Pattern.DOTALL);
-		return isValidString(result);
+		if(cpfCnpj.length() == 11 || cpfCnpj.length() == 14) {
+			return true;
+		}
+		return false;
 	}
 	
 	public static final String executeRegexp(final String text, final String er, final int group, int pattern) {

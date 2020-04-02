@@ -17,20 +17,21 @@ public class ClienteDAO {
 	public Cliente salvar(Cliente novoCliente) {
 		Connection conexao = Banco.getConnection();
 		String sql = " INSERT INTO CLIENTE(NOME, SOBRENOME, CPF, IDENDERECO) "
-				+ " VALUES (?,?,?,?)";
-		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql, 
-				PreparedStatement.RETURN_GENERATED_KEYS);
+				+ " VALUES (?,?,?,?) returning id;";
+		PreparedStatement stmt;
+		
 		try {
+			stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, novoCliente.getNome());
 			stmt.setString(2, novoCliente.getSobrenome());
 			stmt.setString(3, novoCliente.getCpf());
 			stmt.setInt(4, novoCliente.getEndereco().getId());
-			stmt.execute();
 			
-			ResultSet rs = stmt.getGeneratedKeys();
+			
+			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) {
-				int idGerado = rs.getInt(1);
+				int idGerado = rs.getInt("id");
 				novoCliente.setId(idGerado);
 			}
 			
@@ -38,6 +39,7 @@ public class ClienteDAO {
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir novo cliente.");
 			System.out.println("Erro: " + e.getMessage());
+			e.printStackTrace();
 		}
 		
 		return novoCliente;

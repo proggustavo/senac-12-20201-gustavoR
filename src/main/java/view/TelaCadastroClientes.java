@@ -18,10 +18,8 @@ public class TelaCadastroClientes {
 
 	private JFrame frame;
 	private JTextField textNome;
-	private JLabel lblSobrenome;
 	private JTextField textSobrenome;
 	private JTextField textCpfCnpj;
-	private JLabel lblCpfcnpj;
 	private ClienteController clienteController;
 
 	/**
@@ -52,52 +50,50 @@ public class TelaCadastroClientes {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setTitle("Cadastro de Cliente");
-		frame.setBounds(100, 100, 532, 303);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(31, 12, 70, 15);
+		lblNome.setBounds(25, 12, 70, 15);
 		frame.getContentPane().add(lblNome);
 		
 		textNome = new JTextField();
-		textNome.setBounds(31, 39, 190, 23);
+		textNome.setBounds(25, 31, 114, 19);
 		frame.getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
-		lblSobrenome = new JLabel("Sobrenome:");
-		lblSobrenome.setBounds(31, 74, 122, 15);
+		JLabel lblSobrenome = new JLabel("Sobrenome");
+		lblSobrenome.setBounds(25, 73, 121, 15);
 		frame.getContentPane().add(lblSobrenome);
 		
 		textSobrenome = new JTextField();
-		textSobrenome.setBounds(31, 101, 190, 23);
+		textSobrenome.setBounds(25, 100, 114, 19);
 		frame.getContentPane().add(textSobrenome);
 		textSobrenome.setColumns(10);
 		
+		JLabel lblCpfcnpj = new JLabel("CPF/CNPJ");
+		lblCpfcnpj.setBounds(203, 12, 70, 15);
+		frame.getContentPane().add(lblCpfcnpj);
+		
 		textCpfCnpj = new JTextField();
-		textCpfCnpj.setBounds(285, 39, 190, 23);
+		textCpfCnpj.setBounds(203, 31, 114, 19);
 		frame.getContentPane().add(textCpfCnpj);
 		textCpfCnpj.setColumns(10);
-		
-		lblCpfcnpj = new JLabel("CPF/CNPJ:");
-		lblCpfcnpj.setBounds(285, 12, 70, 15);
-		frame.getContentPane().add(lblCpfcnpj);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EnderecoDAO enderecoDAO = new EnderecoDAO();
-				Endereco endereco = enderecoDAO.consultarPorId(1);
-				clienteController.inserirClienteController(textNome.getText(), textSobrenome.getText(), textCpfCnpj.getText(), endereco);
+				EnderecoDAO enderecoDao = new EnderecoDAO();
+				Endereco endereco = enderecoDao.consultarPorId(1);
 				
-				String message = "";
-				JOptionPane.showMessageDialog(null, message, "Cadastrar Cliente", JOptionPane.INFORMATION_MESSAGE);
+				String message = clienteController.inserirClienteController(textNome.getText(), textSobrenome.getText(), textCpfCnpj.getText(), endereco);
+				
+				JOptionPane.showMessageDialog(null, message, "Cadastro de Cliente",
+							JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnCadastrar.setBounds(199, 184, 117, 25);
+		btnCadastrar.setBounds(147, 176, 117, 25);
 		frame.getContentPane().add(btnCadastrar);
-		
-		
 	}
 }
