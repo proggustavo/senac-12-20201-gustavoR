@@ -3,15 +3,17 @@ package view;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.ClienteController;
-import model.dao.EnderecoDAO;
+import controller.EnderecoController;
 import model.vo.Endereco;
 
 public class TelaCadastroClientes {
@@ -21,6 +23,8 @@ public class TelaCadastroClientes {
 	private JTextField textSobrenome;
 	private JTextField textCpfCnpj;
 	private ClienteController clienteController;
+	private EnderecoController enderecoController;
+	private JComboBox cmbEnderecos;
 
 	/**
 	 * Launch the application.
@@ -59,7 +63,7 @@ public class TelaCadastroClientes {
 		frame.getContentPane().add(lblNome);
 		
 		textNome = new JTextField();
-		textNome.setBounds(25, 31, 114, 19);
+		textNome.setBounds(25, 31, 190, 23);
 		frame.getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
@@ -68,32 +72,42 @@ public class TelaCadastroClientes {
 		frame.getContentPane().add(lblSobrenome);
 		
 		textSobrenome = new JTextField();
-		textSobrenome.setBounds(25, 100, 114, 19);
+		textSobrenome.setBounds(25, 100, 190, 23);
 		frame.getContentPane().add(textSobrenome);
 		textSobrenome.setColumns(10);
 		
 		JLabel lblCpfcnpj = new JLabel("CPF/CNPJ");
-		lblCpfcnpj.setBounds(203, 12, 70, 15);
+		lblCpfcnpj.setBounds(243, 12, 70, 15);
 		frame.getContentPane().add(lblCpfcnpj);
 		
 		textCpfCnpj = new JTextField();
-		textCpfCnpj.setBounds(203, 31, 114, 19);
+		textCpfCnpj.setBounds(237, 31, 190, 23);
 		frame.getContentPane().add(textCpfCnpj);
 		textCpfCnpj.setColumns(10);
+		
+		ArrayList<Endereco> enderecos = enderecoController.consultarTodosEnderecos();
+		cmbEnderecos = new JComboBox();
+		cmbEnderecos.addItem("- - - - - Selecione um endereço - - - - -");;
+		for (Endereco endereco : enderecos) {
+			cmbEnderecos.addItem(endereco);
+		}
+		cmbEnderecos.setBounds(237, 100, 190, 24);
+		frame.getContentPane().add(cmbEnderecos);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EnderecoDAO enderecoDao = new EnderecoDAO();
-				Endereco endereco = enderecoDao.consultarPorId(1);
+			
+				Endereco endereco = (Endereco) cmbEnderecos.getSelectedItem();
 				
-				String message = clienteController.inserirClienteController(textNome.getText(), textSobrenome.getText(), textCpfCnpj.getText(), endereco);
+				String message = clienteController.inserirClienteController(textNome.getText(), textSobrenome.getText(), textCpfCnpj.getText(), null);
 				
 				JOptionPane.showMessageDialog(null, message, "Cadastro de Cliente",
 							JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnCadastrar.setBounds(147, 176, 117, 25);
+		btnCadastrar.setBounds(182, 179, 117, 25);
 		frame.getContentPane().add(btnCadastrar);
+		
 	}
 }

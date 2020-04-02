@@ -1,6 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.bo.EnderecoBO;
+import model.dao.EnderecoDAO;
+import model.vo.Endereco;
 
 public class EnderecoController {
 	
@@ -8,6 +12,7 @@ public class EnderecoController {
 	private static final int TAMANHO_MAXIMO_CAMPO_RUA = 255;
 	
 	private EnderecoBO enderecoBo = new EnderecoBO();
+	private EnderecoDAO enderecoDao = new EnderecoDAO();
 	
 	public String excluir(String textoIdSelecionado) {
 		String mensagem = "";
@@ -46,6 +51,11 @@ public class EnderecoController {
 			mensagem = nomeDoCampo + " deve possuir pelo menos + " + tamanhoMinimo + " caracteres e no máximo " + tamanhoMaximo + " caracteres\n";
 		}
 		return mensagem;
+	}
+	
+	
+	public ArrayList<Endereco> consultarTodosEnderecos(){
+		return enderecoDao.consultarTodos();
 	}
 
 }

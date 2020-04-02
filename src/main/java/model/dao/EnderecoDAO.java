@@ -102,7 +102,7 @@ public class EnderecoDAO implements BaseDAO<Endereco>{
 	}
 
 	public ArrayList<Endereco> consultarTodos() {
-		String sql = " SELECT * FROM ENDERECO ";
+		String sql = "SELECT * FROM ENDERECO ";
 
 		Connection conexao = Banco.getConnection();
 		PreparedStatement preparedStatement = Banco.getPreparedStatement(conexao, sql);

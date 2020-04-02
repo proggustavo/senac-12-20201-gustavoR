@@ -1,12 +1,15 @@
 package testes;
 
+import java.util.ArrayList;
+
 import controller.ClienteController;
+import controller.EnderecoController;
 import model.dao.EnderecoDAO;
 import model.vo.Endereco;
 
 public class Teste {
 	public static void main(String[] args) {
-		testesCliente();
+		consultarEnderecos();
 	}
 
 	public static void testesCliente() {
@@ -18,5 +21,14 @@ public class Teste {
 		System.out.println(message);
 
 	}
-
+	
+	public static void consultarEnderecos() {
+		EnderecoController enderecoController = new EnderecoController();
+		ArrayList<Endereco> enderecos = enderecoController.consultarTodosEnderecos();
+		
+		for (Endereco endereco : enderecos) {
+			System.out.println(endereco.toString());
+		}
+		
+	}
 }
