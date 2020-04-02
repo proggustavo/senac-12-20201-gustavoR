@@ -17,14 +17,14 @@ public class TelefoneDAO {
 		
 		Connection conn = Banco.getConnection();
 		String sql = "INSERT INTO TELEFONE (codigoPais, ddd, numero, movel, idCliente, ativo) "
-				+ "VALUES (?,?,?,?,?,?)";
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
+				+ "VALUES (?,?,?,?,?,?) returning id";
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
 
 		try {
 			stmt.setString(1, novoTelefone.getCodigoPais());
 			stmt.setString(2, novoTelefone.getDdd());
 			stmt.setString(3, novoTelefone.getNumero());
-			stmt.setString(4, novoTelefone.isMovel() ? "1" : "0");
+			stmt.setInt(4, novoTelefone.isMovel() ? 1 : 0);
 
 			if (novoTelefone.getDono() != null) {
 				stmt.setInt(5, novoTelefone.getDono().getId());
@@ -33,11 +33,11 @@ public class TelefoneDAO {
 			}
 
 			stmt.setInt(6, novoTelefone.isAtivo() ? 1 : 0);
-			stmt.execute();
 
-			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			if (generatedKeys.next()) {
-				int idGerado = generatedKeys.getInt(1);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				int idGerado = rs.getInt("id");
 				novoTelefone.setId(idGerado);
 			}
 		} catch (SQLException e) {
