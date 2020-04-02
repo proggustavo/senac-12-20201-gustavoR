@@ -7,7 +7,7 @@ public class Utils {
 
 	public static boolean validarCpfCnpj(String cpfCnpj) {
 		cpfCnpj.replaceAll("[^0-9]", "");
-		if(cpfCnpj.length() == 11 || cpfCnpj.length() == 14) {
+		if(cpfCnpj.length() == 11) {
 			return true;
 		}
 		return false;

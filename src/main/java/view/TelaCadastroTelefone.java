@@ -81,7 +81,6 @@ public class TelaCadastroTelefone {
 		frmCadastroDeTelefone.getContentPane().add(lblSelecioneUmaOpo);
 
 		rdbtnMovel = new JRadioButton("Movel");
-		rdbtnMovel.setMnemonic('c');
 		rdbtnMovel.setBounds(329, 61, 80, 23);
 		frmCadastroDeTelefone.getContentPane().add(rdbtnMovel);
 		rdbtnMovel.setActionCommand("1");
@@ -107,7 +106,7 @@ public class TelaCadastroTelefone {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				TelefoneController telefoneController = new TelefoneController();
 				Telefone telefone = new Telefone();
 				telefone.setNumero(textNumero.getText());
 				telefone.setCodigoPais(textCodigo.getText());
