@@ -11,7 +11,7 @@ public class Teste {
 	ClienteController clienteController = new ClienteController();
 	EnderecoDAO enderecoDAO = new EnderecoDAO();
 	Endereco endereco = enderecoDAO.consultarPorId(1);
-	String message = clienteController.inserirClienteController("Gustavo", "Rodrigues", "12341243", endereco);
+	String message = clienteController.inserirClienteController("Gustavo", "Rodrigues", "00030985942", endereco);
 	System.out.println(message);
 	
 	}

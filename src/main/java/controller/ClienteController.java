@@ -33,12 +33,12 @@ public class ClienteController {
 	public String inserirClienteController(String nome, String sobrenome, String cpfCnpj, Endereco endereco) {
 		String message = "";
 		
-		if(Utils.validarCpfCnpj(cpfCnpj)){
+		if(!Utils.isValidString(nome)){
+			message += "Nome inválido ";
+		}else if(!Utils.validarCpfCnpj(cpfCnpj)){
 			message += "CPF ou CNPJ inválido ";
-		}else if(Utils.isValidString(nome.replaceAll("[^0-9]", ""))){
-			message += "Nome inválido";
-		}else if(Utils.isValidString(sobrenome.replaceAll("[^0-9]", ""))){
-			message += "Sobrenome inválido";
+		}else if(!Utils.isValidString(sobrenome)){
+			message += "Sobrenome inválido ";
 		}
 		
 		if(message.isEmpty()) {
