@@ -69,7 +69,7 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		String mensagem = "Cliente: " + this.getNomeCompleto() + " (" + cpf + "). " + "\nEndereço: " + endereco
+		String mensagem = "Cliente: " + this.getNomeCompleto() + " (" + cpf + "). "
 				+ "\nTelefones: ";
 
 		for (Telefone t : telefones) {

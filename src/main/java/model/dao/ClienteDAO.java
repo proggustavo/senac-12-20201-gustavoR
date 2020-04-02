@@ -59,6 +59,8 @@ public class ClienteDAO {
 			System.out.println("Erro: " + e.getMessage());
 		}
 		
+		boolean excluiu = quantidadeLinhasAfetadas > 0;
+		
 		return quantidadeLinhasAfetadas > 0;
 	}
 

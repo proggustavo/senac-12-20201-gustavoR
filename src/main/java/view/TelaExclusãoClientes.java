@@ -60,7 +60,7 @@ public class TelaExclusãoClientes {
 		frame.getContentPane().add(lblSelecioneONome);
 
 		clientes = clienteController.listarTodosOsClientes();
-		cmbClientes = new JComboBox();
+		cmbClientes =  new JComboBox();
 		cmbClientes.addItem("- - - - - - - - Selecione um Cliente - - - - - - - -");
 		for (Cliente cliente : clientes) {
 			cmbClientes.addItem(cliente);
@@ -73,11 +73,15 @@ public class TelaExclusãoClientes {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO adicionar uma confirmação se deseja excluir o cliente
-				
+
 				Cliente cliente = new Cliente();
 				try {
 					cliente = (Cliente) cmbClientes.getSelectedItem();
-					JOptionPane.showMessageDialog(null, clienteController.excluirCliente(cliente), "Excluir Cliente", JOptionPane.INFORMATION_MESSAGE);
+					String message = clienteController.excluirCliente(cliente);
+					if(message == "O cliente foi excluído!") {
+						cmbClientes.removeItem(cmbClientes.getSelectedItem());
+					}
+					JOptionPane.showMessageDialog(null, message, "Excluir Cliente", JOptionPane.INFORMATION_MESSAGE);
 					clientes = clienteController.listarTodosOsClientes();
 				} catch (ClassCastException e) {
 					JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado!", "Atenção!",
