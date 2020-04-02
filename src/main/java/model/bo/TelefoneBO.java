@@ -10,6 +10,7 @@ public class TelefoneBO {
 	public String salvar(Telefone novoTelefone) {
 		String mensagem = "";
 
+		
 		novoTelefone = dao.salvar(novoTelefone);
 
 		if (novoTelefone.getId() > 0) {
