@@ -19,7 +19,7 @@ public class TelefoneBO {
 				mensagem = "Erro ao cadastrar telefone";
 			}
 		}else {
-			mensagem = "Número já cadastrado!"; 
+			mensagem = "Não foi possível cadastrar.\nO Número já está sendo utilizado!"; 
 		}
 
 		return mensagem;
