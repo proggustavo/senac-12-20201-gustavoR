@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.bo.TelefoneBO;
 import model.dao.TelefoneDAO;
+import model.vo.Cliente;
 import model.vo.Telefone;
 import utils.Utils;
 
@@ -46,10 +47,10 @@ public class TelefoneController {
 		novoTelefone.setDdd(Utils.formatOnlyNumbers(novoTelefone.getDdd()));
 
 		if (novoTelefone.getNumero().length() < 9) {
-			message = "Número do telefone inválido\nMinímo 9 e máximo 14 dígitos";
+			message = "Número do telefone inválido\nMinímo 9 e máximo 14 dígitos\n";
 		}else {
 			if(novoTelefone.getCodigoPais().length() != 2) {
-				message += "Código do país inválido";
+				message += "Código do país inválido\n";
 			}
 			if (novoTelefone.getDdd().length() != 2) {
 				message += "DDD inválido \n";
@@ -63,6 +64,13 @@ public class TelefoneController {
 		// TODO desenvolver
 
 		return "";
+	}
+	
+	
+	
+	public ArrayList<Telefone> consultarTodosPorIdCliente(Cliente cliente){
+		
+		return dao.consultarTodosPorIdCliente(cliente.getId());
 	}
 	
 	

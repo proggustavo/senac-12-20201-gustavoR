@@ -7,13 +7,48 @@ import javax.swing.JOptionPane;
 import controller.ClienteController;
 import controller.EnderecoController;
 import controller.TelefoneController;
+import model.dao.ClienteDAO;
 import model.dao.EnderecoDAO;
+import model.dao.TelefoneDAO;
+import model.vo.Cliente;
 import model.vo.Endereco;
 import model.vo.Telefone;
 
 public class Teste {
 	public static void main(String[] args) {
-		cadastrarTelefone();
+		consultarTodosOsClientes();
+		
+	}
+	
+	public static void consultarTelefonesPorCliente() {
+		TelefoneDAO telefoneDao = new TelefoneDAO();
+		ArrayList<Telefone>  telefones = telefoneDao.consultarTodosPorIdCliente(1);
+		
+		for (Telefone telefone : telefones) {
+			System.out.println(telefone.toString());
+			
+		}
+	}	
+		
+	
+	public static void consultarClientePorId() {
+		ClienteDAO clienteDAO = new ClienteDAO();
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		clientes.add(clienteDAO.consultarPorId(1));
+		for (Cliente cliente : clientes) {
+			System.out.println(cliente.getNome());
+			
+		}
+	}
+	
+	public static void consultarTodosOsClientes() {
+		ClienteDAO clienteDAO = new ClienteDAO();
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		clientes = clienteDAO.consultarTodos();
+		for (Cliente cliente : clientes) {
+			System.out.println(cliente.getNome());
+			
+		}
 	}
 
 	public static void testesCliente() {

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.dao.Banco;
 import model.vo.Cliente;
 import model.vo.Endereco;
 import model.vo.Telefone;
@@ -92,9 +91,55 @@ public class ClienteDAO {
 	}
 
 	public Cliente consultarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Banco.getConnection();
+		String sql = "SELECT * FROM CLIENTE WHERE id = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		
+		
+		Cliente cliente = new Cliente();
+		try {
+			stmt.setInt(1, cliente.getId());
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				cliente.setId(rs.getInt("id"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setSobrenome(rs.getString("sobrenome"));
+				
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar clientes por id.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return cliente;
 	}
+	
+	public Cliente consultarPorIdSemTelefone(int id) {
+		Connection conexao = Banco.getConnection();
+		String sql = "SELECT * FROM CLIENTE WHERE id = ?";
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		
+		
+		Cliente cliente = new Cliente();
+		try {
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				cliente.setId(rs.getInt("id"));
+				cliente.setNome(rs.getString("nome"));
+				cliente.setSobrenome(rs.getString("sobrenome"));
+				
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar clientes por id.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return cliente;
+	}
+
 
 	public ArrayList<Cliente> consultarTodos() {
 		Connection conexao = Banco.getConnection();

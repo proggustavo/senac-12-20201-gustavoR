@@ -216,7 +216,7 @@ public class TelefoneDAO {
 			telefone.setId(resultadoDaConsulta.getInt("id"));
 
 			ClienteDAO cDAO = new ClienteDAO();
-			Cliente donoDoTelefone = cDAO.consultarPorId(resultadoDaConsulta.getInt("idCliente"));
+			Cliente donoDoTelefone = cDAO.consultarPorIdSemTelefone(resultadoDaConsulta.getInt("idCliente"));
 			telefone.setDono(donoDoTelefone);
 			telefone.setCodigoPais(resultadoDaConsulta.getString("codigoPais"));
 			telefone.setDdd(resultadoDaConsulta.getString("ddd"));
