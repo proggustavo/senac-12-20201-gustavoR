@@ -49,9 +49,9 @@ public class ClienteController {
 				message += "CPF ou CNPJ já utilizado!";
 			}else {
 					Cliente novoCliente = new Cliente(nome, sobrenome, cpfCnpj, null, endereco);
-					int cliente = clienteDao.salvar(novoCliente).getId();
+					Cliente clienteCadastrado = clienteDao.salvar(novoCliente);
 					// TODO como fazer uma ternária nesse caso
-				if (cliente > 0) {
+				if (clienteCadastrado.getId() > 0 ) {
 					message += "Cliente cadastrado com sucesso!";
 				} else {
 					message += "Cliente não cadastrado!";

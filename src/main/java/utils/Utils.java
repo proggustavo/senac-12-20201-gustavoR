@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Utils {
 
 	public static boolean validarCpfCnpj(String cpfCnpj) {
-		cpfCnpj.replaceAll("[^0-9]", "");
+		cpfCnpj = cpfCnpj.replaceAll("[^0-9]", "");
 		if(cpfCnpj.length() == 11 || cpfCnpj.length() == 14) {
 			return true;
 		}
@@ -25,6 +25,15 @@ public class Utils {
 	public static final boolean isValidString(final String string) {
 		return string != null && !"".equals(string);
 	}
+	
+	public static final String formatOnlyNumbers(final String string) {
+		if (!isValidString(string)) {
+			return "";
+		}
+		return string.replaceAll("[^0-9]", "");
+	}
+
+
 
 
 		

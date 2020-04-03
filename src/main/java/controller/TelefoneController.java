@@ -2,6 +2,7 @@ package controller;
 
 import model.bo.TelefoneBO;
 import model.vo.Telefone;
+import utils.Utils;
 
 public class TelefoneController {
 
@@ -21,35 +22,33 @@ public class TelefoneController {
 	 */
 	public String salvar(Telefone novoTelefone) {
 		String mensagemValidacao = validarCampos(novoTelefone);
-
+		
 		if (mensagemValidacao.isEmpty()) {
+			
 			mensagemValidacao = bo.salvar(novoTelefone);
 		}
 		return mensagemValidacao;
 	}
 
 	private String validarCampos(Telefone novoTelefone) {
-		String mensagem = "";
+		String message = "";
+		
+		novoTelefone.setNumero(Utils.formatOnlyNumbers(novoTelefone.getNumero()));
+		novoTelefone.setCodigoPais(Utils.formatOnlyNumbers(novoTelefone.getCodigoPais()));
+		novoTelefone.setDdd(Utils.formatOnlyNumbers(novoTelefone.getDdd()));
 
-		if (novoTelefone == null) {
-			mensagem = "Telefone não foi criado";
-		} else {
-			if (novoTelefone.getDdd().trim().length() != 2) {
-				mensagem += "Informe o DDD com 2 dígitos \n";
+		if (novoTelefone.getNumero().length() < 9) {
+			message = "Número do telefone inválido\nMinímo 9 e máximo 14 dígitos";
+		}else {
+			if(novoTelefone.getCodigoPais().length() != 2) {
+				message += "Código do país inválido";
 			}
-
-			try {
-				Integer.parseInt(novoTelefone.getDdd());
-			} catch (NumberFormatException ex) {
-				mensagem += "O DDD deve ser um NÚMERO";
+			if (novoTelefone.getDdd().length() != 2) {
+				message += "DDD inválido \n";
 			}
 		}
 
-		// TODO fazer mais validações
-		// Numero
-
-		// Codigo pais
-		return mensagem;
+		return message;
 	}
 
 	private String validarCampoNumerico(String valorDoCampo, String nomeDoCampo, int tamanhoMinimo, int tamanhoMaximo) {

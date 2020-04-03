@@ -10,14 +10,18 @@ public class TelefoneBO {
 	public String salvar(Telefone novoTelefone) {
 		String mensagem = "";
 
-		
-		novoTelefone = dao.salvar(novoTelefone);
-
-		if (novoTelefone.getId() > 0) {
-			mensagem = "Telefone cadastrado com sucesso";
-		} else {
-			mensagem = "Erro ao cadastrar telefone";
+		if(!dao.telefoneJaCadastrado(novoTelefone)) {
+			novoTelefone = dao.salvar(novoTelefone);
+			
+			if (novoTelefone.getId() > 0) {
+				mensagem = "Telefone cadastrado com sucesso";
+			} else {
+				mensagem = "Erro ao cadastrar telefone";
+			}
+		}else {
+			mensagem = "Número já cadastrado!"; 
 		}
+
 		return mensagem;
 	}
 
