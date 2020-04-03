@@ -83,7 +83,7 @@ public class TelaCadastroTelefone {
 		rdbtnMovel = new JRadioButton("Movel");
 		rdbtnMovel.setBounds(329, 61, 80, 23);
 		frmCadastroDeTelefone.getContentPane().add(rdbtnMovel);
-		rdbtnMovel.setActionCommand("1");
+		rdbtnMovel.setSelected(true);;
 
 		JRadioButton rdbtnFixo = new JRadioButton("Fixo");
 		rdbtnFixo.setBounds(213, 61, 80, 23);

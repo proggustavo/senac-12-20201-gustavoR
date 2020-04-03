@@ -233,17 +233,22 @@ public class TelefoneDAO {
 
 	public boolean telefoneJaCadastrado(Telefone novoTelefone) {
 		String sql = " SELECT ID FROM TELEFONE T " 
-				+ " WHERE T.CODIGOPAIS = " + novoTelefone.getCodigoPais()
-				+ " AND T.DDD = " + novoTelefone.getDdd() 
-				+ " AND T.NUMERO = " + novoTelefone.getNumero();
+				+ " WHERE T.CODIGOPAIS = ? " 
+				+ " AND T.DDD =  ? " 
+				+ " AND T.NUMERO =  ? ";
 
 		Connection conn = Banco.getConnection();
-		Statement stmt = Banco.getStatement(conn);
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
 
 		ResultSet rs = null;
 		boolean telefoneJaCadastrado = false;
 		try {
-			rs = stmt.executeQuery(sql);
+	
+			stmt.setString(1, novoTelefone.getCodigoPais());
+			stmt.setString(2, novoTelefone.getDdd());
+			stmt.setString(3, novoTelefone.getNumero());
+			
+			rs = stmt.executeQuery();
 			telefoneJaCadastrado = rs.next();
 
 		} catch (SQLException e) {
