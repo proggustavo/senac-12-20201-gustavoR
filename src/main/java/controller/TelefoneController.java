@@ -1,12 +1,16 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.bo.TelefoneBO;
+import model.dao.TelefoneDAO;
 import model.vo.Telefone;
 import utils.Utils;
 
 public class TelefoneController {
 
 	private TelefoneBO bo = new TelefoneBO();
+	private TelefoneDAO dao = new TelefoneDAO();
 
 	/**
 	 * Salva um novo telefone, validando os valores informados
@@ -28,6 +32,10 @@ public class TelefoneController {
 			mensagemValidacao = bo.salvar(novoTelefone);
 		}
 		return mensagemValidacao;
+	}
+	
+	public ArrayList<Telefone> consultarTodos(){
+		return dao.consultarTodos();
 	}
 
 	private String validarCampos(Telefone novoTelefone) {
@@ -56,5 +64,7 @@ public class TelefoneController {
 
 		return "";
 	}
+	
+	
 
 }

@@ -158,7 +158,7 @@ public class TelefoneDAO {
 
 	public ArrayList<Telefone> consultarTodos() {
 		Connection conn = Banco.getConnection();
-		String sql = " SELECT id, codigoPais, ddd, numero, tipoLinha, idCliente, ativo " + " FROM TELEFONE ";
+		String sql = " SELECT id, codigoPais, ddd, numero, movel, idCliente, ativo " + " FROM TELEFONE ";
 
 		Statement stmt = Banco.getStatement(conn);
 		ArrayList<Telefone> telefones = new ArrayList<Telefone>();
