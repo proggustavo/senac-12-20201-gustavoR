@@ -1,14 +1,14 @@
 #
 # A fatal error has been detected by the Java Runtime Environment:
 #
-#  SIGSEGV (0xb) at pc=0x00007f6711210401, pid=15779, tid=15794
+#  SIGSEGV (0xb) at pc=0x00007f19735bc401, pid=30550, tid=30567
 #
 # JRE version: OpenJDK Runtime Environment (11.0.6+10) (build 11.0.6+10-post-Ubuntu-1ubuntu118.04.1)
 # Java VM: OpenJDK 64-Bit Server VM (11.0.6+10-post-Ubuntu-1ubuntu118.04.1, mixed mode, sharing, tiered, compressed oops, g1 gc, linux-amd64)
 # Problematic frame:
 # C  [libjimage.so+0x2401]
 #
-# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P %E" (or dumping to /home/gustavo/Documentos/Programming/Senac/java/senac-12-20201-gustavoR/core.15779)
+# Core dump will be written. Default location: Core dumps may be processed with "/usr/share/apport/apport %p %s %c %d %P %E" (or dumping to /home/gustavo/Documentos/Programming/Senac/java/senac-12-20201-gustavoR/core.30550)
 #
 # If you would like to submit a bug report, please visit:
 #   https://bugs.launchpad.net/ubuntu/+source/openjdk-lts
@@ -16,6 +16,6 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:37191 -javaagent:/home/gustavo/eclipse/configuration/org.eclipse.osgi/405/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 view.TelaCadastroClientes
+Command Line: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:46387 -javaagent:/home/gustavo/eclipse/configuration/org.eclipse.osgi/405/0/.cp/lib/javaagent-shaded.jar -Dfile.encoding=UTF-8 view.TelaListagemTelefones
 
 Host: 

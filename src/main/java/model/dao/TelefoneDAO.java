@@ -158,7 +158,7 @@ public class TelefoneDAO {
 
 	public ArrayList<Telefone> consultarTodos() {
 		Connection conn = Banco.getConnection();
-		String sql = " SELECT id, codigoPais, ddd, numero, tipoLinha, idCliente, ativo " + " FROM TELEFONE ";
+		String sql = " SELECT id, codigoPais, ddd, numero, movel, idCliente, ativo " + " FROM TELEFONE ";
 
 		Statement stmt = Banco.getStatement(conn);
 		ArrayList<Telefone> telefones = new ArrayList<Telefone>();
@@ -216,7 +216,7 @@ public class TelefoneDAO {
 			telefone.setId(resultadoDaConsulta.getInt("id"));
 
 			ClienteDAO cDAO = new ClienteDAO();
-			Cliente donoDoTelefone = cDAO.consultarPorId(resultadoDaConsulta.getInt("idCliente"));
+			Cliente donoDoTelefone = cDAO.consultarPorIdSemTelefone(resultadoDaConsulta.getInt("idCliente"));
 			telefone.setDono(donoDoTelefone);
 			telefone.setCodigoPais(resultadoDaConsulta.getString("codigoPais"));
 			telefone.setDdd(resultadoDaConsulta.getString("ddd"));
