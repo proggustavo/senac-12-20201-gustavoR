@@ -73,7 +73,7 @@ public class TelaExclusãoClientes {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO adicionar uma confirmação se deseja excluir o cliente
-
+				ClienteController clienteController = new ClienteController();
 				Cliente cliente = new Cliente();
 				try {
 					cliente = (Cliente) cmbClientes.getSelectedItem();

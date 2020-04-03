@@ -72,9 +72,7 @@ public class Cliente {
 		String mensagem = "Cliente: " + this.getNomeCompleto() + " (" + cpf + "). "
 				+ "\nTelefones: ";
 
-		for (Telefone t : telefones) {
-			mensagem += t.toString() + "\n";
-		}
+
 
 		return mensagem;
 	}
