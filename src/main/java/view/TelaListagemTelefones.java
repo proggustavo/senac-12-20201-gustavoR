@@ -42,7 +42,7 @@ public class TelaListagemTelefones {
 			novaLinhaDaTabela[2] = telefone.getDdd();
 			novaLinhaDaTabela[3] = telefone.isMovel();
 			novaLinhaDaTabela[4] = telefone.isAtivo();
-			novaLinhaDaTabela[5] = telefone.getDono();
+			novaLinhaDaTabela[5] = telefone.getDono().getNome();
 
 			model.addRow(novaLinhaDaTabela);
 		}
@@ -61,7 +61,7 @@ public class TelaListagemTelefones {
 			novaLinhaDaTabela[2] = telefone.getDdd();
 			novaLinhaDaTabela[3] = telefone.isMovel();
 			novaLinhaDaTabela[4] = telefone.isAtivo();
-			novaLinhaDaTabela[5] = telefone.getDono();
+			novaLinhaDaTabela[5] = telefone.getDono().getNome();
 
 			model.addRow(novaLinhaDaTabela);
 		}
