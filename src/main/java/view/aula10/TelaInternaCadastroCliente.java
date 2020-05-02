@@ -1,19 +1,22 @@
 package view.aula10;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
+
+import controller.EnderecoController;
+import model.vo.Endereco;
 
 public class TelaInternaCadastroCliente extends JInternalFrame {
 	private JTextField textNome;
 	private JTextField textSobrenome;
+	private JTextField textDtNascimento;
+	private JComboBox cmbEnderecos;
 
 	/**
 	 * Launch the application.
@@ -37,26 +40,52 @@ public class TelaInternaCadastroCliente extends JInternalFrame {
 	public TelaInternaCadastroCliente() {
 		setClosable(true);
 		setTitle("Cadastrar Cliente");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 550, 300);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(39, 41, 70, 15);
+		lblNome.setBounds(37, 12, 70, 15);
 		getContentPane().add(lblNome);
 		
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
-		lblSobrenome.setBounds(39, 101, 123, 15);
+		lblSobrenome.setBounds(37, 72, 123, 15);
 		getContentPane().add(lblSobrenome);
 		
 		textNome = new JTextField();
-		textNome.setBounds(93, 39, 114, 19);
+		textNome.setBounds(37, 39, 188, 21);
 		getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
 		textSobrenome = new JTextField();
-		textSobrenome.setBounds(131, 99, 114, 19);
+		textSobrenome.setBounds(37, 99, 188, 21);
 		getContentPane().add(textSobrenome);
 		textSobrenome.setColumns(10);
+		
+		textDtNascimento = new JTextField();
+		textDtNascimento.setColumns(10);
+		textDtNascimento.setBounds(249, 39, 188, 21);
+		getContentPane().add(textDtNascimento);
+		
+		JLabel lblDataNascimento = new JLabel("Data Nascimento:");
+		lblDataNascimento.setBounds(249, 12, 141, 15);
+		getContentPane().add(lblDataNascimento);
+		
+		ArrayList<Endereco> enderecos = new  ArrayList<Endereco>();
+		EnderecoController enderecoController = new EnderecoController();
+		
+		enderecos = enderecoController.consultarTodosEnderecos();
+		cmbEnderecos = new JComboBox();
+		cmbEnderecos.addItem("- - - - - Selecione um endereço - - - - -");
+		for (Endereco endereco : enderecos) {
+			cmbEnderecos.addItem(endereco);
+		}
+		cmbEnderecos.setBounds(247, 97, 281, 24);
+		getContentPane().add(cmbEnderecos);
+
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBounds(174, 168, 188, 25);
+		getContentPane().add(btnSalvar);
 
 	}
 }
