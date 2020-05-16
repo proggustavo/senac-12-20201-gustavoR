@@ -21,7 +21,6 @@ public class MenuPrincipalOpcao1 extends JFrame {
 	private JDesktopPane desktopPane;
 	private TelaInternaCadastroCliente telaCadastroCliente;
 	private TelaInternaCadastrotelefone telaInternaCadastrotelefone;
-	private PainelTelefone painelTelefone;
 	private TelaInternaListarTelefones telaInternaListarTelefones;
 	private TelaInternaExcluirTelefone telaInternaExcluirTelefone;
 	private TelaInternaAutores telaInternaAutores;
